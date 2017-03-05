@@ -6,26 +6,47 @@
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 </head>
+
 <body>
     <div id="container"></div>
-    <script type="text/babel">
-        var destination = document.querySelector("#container");
+    <div id="buttonify"></div>
 
-        var HelloWorld = React.createClass({
+    <script type="text/babel">
+        var destination = document.querySelector("#container"),
+            buttonEl = document.querySelector("#buttonify");
+
+        var Hello = React.createClass({
             render: function(){
                 return (
-                    <p>Hello, World!</p>
+                    <p>Hello, {this.props.greetTarget}!</p>
                 );
             }
         });
 
         ReactDOM.render(
             <div>
-                <HelloWorld />
-                <HelloWorld />
-                <HelloWorld />
+                <Hello greetTarget="Batman" />
+                <Hello greetTarget="Iron Man" />
+                <Hello greetTarget="Chuck Norris" />
             </div>,
             destination
+        );
+
+        var Buttonify = React.createClass({
+            render: function() {
+                return (
+                    <div>
+                        <button type={this.props.behavior}>{this.props.children}</button>
+                    </div>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            <div>
+                <Buttonify behavior="Submit">SEND DATA</Buttonify>
+            </div>,
+            buttonEl
         );
     </script>
 </body>
